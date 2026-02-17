@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Will You Be Mine? 💍❤️</title>
+  <meta name="description" content="A special interactive birthday greeting with music, name input, emojis, and a 3D + fullscreen photo gallery." />
+  <link rel="icon" type="image/png" href="https://cdn-icons-png.flaticon.com/512/649/649367.png" />
+ 
+ 
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <!-- SweetAlert2 & Typed.js -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+
+  <!-- External CSS -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  
+<!-- 🌌 Night Sky -->
+<div class="stars"></div>
+<div class="shooting-star"></div>
+
+<!-- 🌌 Night Sky -->
+<div class="stars"></div>
+<div class="shooting-star"></div>
+
+<header>
+  <div class="brand">💖 Love Proposal 💖</div>
+  <div class="controls">
+    <button id="toggleMusic" class="btn secondary" aria-pressed="false">🔇 Mute</button>
+    <button id="toFullscreenBtn" class="btn secondary hidden">🔍 Fullscreen</button>
+  </div>
+</header>
+
+<!-- 🎵 Music -->
+<audio id="bgMusic" src="image/i-love-you.mp3" preload="auto" loop></audio>
+<audio id="galleryMusic" src="image/weaecfvgbhnj.mp3" preload="auto" loop></audio>
+
+<!-- 💍 Proposal Section -->
+<section class="proposal">
+  <h2 id="question">Are you ready for something special? 😘</h2>
+
+  <div class="buttons">
+    <button id="yesBtn">YES 💍</button>
+    <button id="noBtn">NO 😈</button>
+  </div>
+
+  <button id="openLetter">💌 Secret Letter</button>
+</section>
+
+<!-- 🎁 Gift Section -->
+<section id="giftSection" aria-label="Gift section">
+  <img id="giftBox" src="image/box.png" alt="Gift Box" />
+  <img id="giftBox" src="image/openbox.png" alt="giftBox">
+  <p id="clickText">Open to see my love 💌</p>
+
+  <div class="stickers" aria-hidden="true">
+    <img src="image/heart-love.png" alt="" />
+    <img src="image/hend-love.jpg" alt="" />
+    <img src="image/rose.png" alt="" />
+  </div>
+</section>
+
+
+
+<!-- 💖 Message Section -->
+<section id="messageSection" class="hidden" aria-live="polite">
+  <img src="image/doll.png" alt="Doll Image">
+
+  <h2 id="typedText"></h2>
+
+  <p class="subline">
+    From my heart to yours... 💌💖<br>
+    Every moment with you is magic ✨<br>
+    Every smile, every word, every heartbeat...<br>
+    All of it led me to one question 💍<br>
+    Will you be mine forever? ❤️
+  </p>
+
+  <div class="emojiWrap" id="emojiContainer">
+    <p>Choose your love mood 💘👇</p>
+    <span class="emoji">❤️</span>
+    <span class="emoji">😘</span>
+    <span class="emoji">💍</span>
+    <span class="emoji">❣</span>
+  </div>
+  <br/>
+</section>
+<!-- 💌 Secret Letter Popup -->
+<div class="letter-popup" id="letterPopup">
+  <div class="letter-box">
+    <h3>🔒 Enter Passcode</h3>
+    <input type="password" id="passcode" placeholder="Enter love code">
+    <button onclick="unlockLetter()">Unlock</button>
+
+    <p id="letterText" class="hidden">
+      प्रिय Dikshya Khadka,<br><br>
+      म तिमीलाई मन पराउँछु, तर कहिल्यै भन्न सक्दिनँ।<br>
+      तिमीको हाँसोले मेरो मन रमाउँछ,<br>
+      तर म सधैं टाढाबाट हेर्छु।<br>
+      मेरो माया केवल मेरो मुटुमा छ,<br>
+      तिमीलाई थाहा बिना।<br><br>
+      सधैं टाढाबाट माया गर्ने,<br>
+      तिम्रो रहस्यमय प्रिय ❤️
+    </p>
+
+    <button onclick="closeLetter()">Close</button>
+  </div>
+</div>
+<!-- 🌌 3D Carousel Gallery -->
+<section id="gallerySection" class="gallery-section" aria-label="3D photo gallery">
+  <div class="gallery">
+    <img src="image/photo (1).jpg" alt="Photo 1" />
+    <img src="image/photo (2).JPG" alt="Photo 2" />
+    <img src="image/photo (3).JPG" alt="Photo 3" />
+    <img src="image/photo (4).JPG" alt="Photo 4" />
+    <img src="image/photo (5).JPG" alt="Photo 5" />
+    <img src="image/photo (6).JPG" alt="Photo 6" />
+    <img src="image/photo (7).JPG" alt="Photo 7" />
+    <img src="image/photo (8).JPG" alt="Photo 8" />
+  </div>
+
+  <h3 class="sectionTitle">💍 Will You Be Mine? 💍</h3>
+</section>
+
+<!-- 📱 Fullscreen Gallery -->
+<section id="fullscreen" class="fullscreen" aria-label="Fullscreen photo gallery">
+  <div class="fs-top">
+    <div>🎉 Memories Gallery</div>
+    <button id="closeFs" class="btn">Close</button>
+  </div>
+
+  <div class="fs-grid" id="fsGrid">
+    <img src="image/photo (1).jpg" alt="Photo 1" />
+    <img src="image/photo (2).JPG" alt="Photo 2" />
+    <img src="image/photo (3).JPG" alt="Photo 3" />
+    <img src="image/photo (4).JPG" alt="Photo 4" />
+    <img src="image/photo (5).JPG" alt="Photo 5" />
+    <img src="image/photo (6).JPG" alt="Photo 6" />
+    <img src="image/photo (7).JPG" alt="Photo 7" />
+    <img src="image/photo (8).JPG" alt="Photo 8" />
+  </div>
+</section>
+
+<footer>
+    तिम्रो आँखामा म एक संसार देख्छु,<br>
+    जसमा म र तिमी मात्र छौं 💕<br>
+    तिम्रो हाँसोमा जादू छ,<br>
+    जसले मेरो सबै पीडा हराउँछ 🌹<br>
+    शब्दले भन्न नसक्ने कुरा,<br>
+    मेरो मुटुले बुझ्छ तिमीलाई ❤️
+    <br>
+    <br>
+    <br>
+  Made with 💖 just for you... Will you be mine forever?
+</footer>
+
+<!-- External JavaScript -->
+<script src="script.js"></script>
+</body>
+</html>

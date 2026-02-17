@@ -1,0 +1,335 @@
+/* ==============================
+   Root Colors
+============================== */
+:root {
+  --pink-1: #ffe6f0;
+  --pink-2: #ffb3d9;
+  --pink-3: #ff66b2;
+  --pink-4: #ff3385;
+  --ink: #fff;
+  --overlay-dark: rgba(0, 0, 0, 0.5);
+  --shadow-dark: rgba(0,0,0,0.6);
+}
+
+/* ==============================
+   Global Reset & Base
+============================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html {
+  scroll-behavior: smooth;
+}
+body {
+  font-family: 'Poppins', sans-serif;
+  color: var(--ink);
+  text-align: center;
+  line-height: 1.6;
+  overflow-x: hidden;
+  background: url('image/ngt.jpg') no-repeat center center fixed;
+  background-size: cover;
+  position: relative;
+}
+
+/* Dark Overlay */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: var(--overlay-dark);
+  z-index: -1;
+}
+
+/* ==============================
+   Stars & Shooting Stars
+============================== */
+.stars {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  overflow: hidden;
+}
+.stars::after {
+  content: '';
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: white;
+  box-shadow:
+    20px 30px rgb(202, 50, 50), 50px 100px rgb(241, 162, 162), 80px 60px rgb(150, 97, 97),
+    120px 200px rgb(148, 109, 109), 200px 300px rgb(99, 63, 63), 300px 150px white,
+    400px 250px white, 500px 50px white, 600px 400px white,
+    700px 200px rgb(153, 2, 2), 800px 350px rgb(116, 61, 61), 900px 150px rgb(124, 38, 38),
+    1000px 300px rgb(75, 45, 45);
+  animation: twinkle 2s infinite alternate;
+}
+@keyframes twinkle {
+  from {opacity:0.5;}
+  to {opacity:1;}
+}
+.shooting-star {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  z-index: -1;
+  pointer-events: none;
+}
+.shooting-star::after {
+  content: '';
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: white;
+  box-shadow: 
+    50px 80px white, 150px 120px white, 250px 200px white,
+    350px 50px white, 450px 300px white, 550px 180px white,
+    650px 400px white, 750px 100px white, 850px 250px white;
+  animation: shoot 3s infinite linear;
+}
+@keyframes shoot {
+  0% { transform: translate(0,0) rotate(45deg); opacity: 0; }
+  10% { opacity: 1; }
+  100% { transform: translate(1200px, 800px) rotate(45deg); opacity: 0; }
+}
+
+/* ==============================
+   Header
+============================== */
+header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 20px;
+  backdrop-filter: blur(12px);
+  background: rgba(0,0,0,0.6);
+}
+.brand {
+  font-family: 'Great Vibes', cursive;
+  font-size: clamp(20px, 4vw, 30px);
+  color: var(--pink-4);
+  text-shadow: 1px 1px 6px var(--shadow-dark);
+}
+.controls {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.btn {
+  padding: 8px 16px;
+  border-radius: 30px;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  background: var(--pink-3);
+  color: rgb(95, 78, 78);
+  transition: 0.3s ease;
+  text-shadow: 1px 1px 3px var(--shadow-dark);
+}
+.btn:hover { transform: scale(1.05); }
+.btn.secondary { background: rgba(255,255,255,0.8); color: var(--pink-4); }
+
+/* ==============================
+   Proposal Section
+============================== */
+.proposal { padding: 60px 20px 30px; }
+.proposal h2 {
+  font-family: 'Great Vibes', cursive;
+  font-size: clamp(24px, 6vw, 38px);
+  margin-bottom: 20px;
+  color: #ceb7b7;
+  text-shadow: 2px 2px 10px var(--shadow-dark);
+}
+.buttons button {
+  padding: 14px 30px;
+  margin: 10px;
+  border-radius: 30px;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  transition: 0.3s;
+}
+#yesBtn { background: var(--pink-4); color: white; }
+#noBtn { background: #444; color: white; }
+.buttons button:hover { transform: scale(1.1); }
+
+/* ==============================
+   Secret Letter Popup
+============================== */
+.letter-popup {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.85);
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  padding: 20px;
+  transition: opacity 0.3s ease;
+}
+.letter-popup.active { display: flex; animation: fadeIn 0.4s ease forwards; }
+@keyframes fadeIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
+.letter-box {
+  background: rgba(255,255,255,0.95);
+  padding: 30px 25px;
+  border-radius: 20px;
+  width: 90%;
+  max-width: 400px;
+  text-align: center;
+  color: #222;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+}
+.letter-box h3 {
+  font-family: 'Great Vibes', cursive;
+  font-size: clamp(20px, 5vw, 28px);
+  color: var(--pink-4);
+  margin-bottom: 20px;
+  text-shadow: 1px 1px 5px var(--shadow-dark);
+}
+.letter-box input {
+  width: 100%;
+  padding: 12px 15px;
+  margin-bottom: 15px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+  outline: none;
+  transition: 0.3s;
+}
+.letter-box input:focus {
+  border-color: var(--pink-3);
+  box-shadow: 0 0 8px var(--pink-2);
+}
+.letter-box button {
+  padding: 12px 25px;
+  margin: 5px;
+  border-radius: 30px;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  transition: 0.3s ease;
+  background: var(--pink-4);
+  color: white;
+  box-shadow: 1px 1px 6px var(--shadow-dark);
+}
+.letter-box button:hover { transform: scale(1.05); background: var(--pink-3); }
+.letter-box button:last-of-type { background: #444; color: white; }
+.letter-box button:last-of-type:hover { background: #555; }
+.letter-box p { margin-top: 20px; font-size: clamp(16px, 4vw, 18px); line-height: 1.6; text-align: left; white-space: pre-line; color: #333; }
+.letter-box p.hidden { display: none; }
+
+/* ==============================
+   Gift Section
+============================== */
+#giftSection { padding: 40px 20px; }
+#giftBox { width: clamp(150px, 40vw, 260px); cursor: pointer; transition: 0.4s ease; }
+#giftBox:hover { transform: scale(1.1) rotate(-5deg); }
+#clickText { margin-top: 15px; font-size: clamp(16px, 4vw, 22px); color: #e9e2e2; text-shadow: 2px 2px 8px var(--shadow-dark); }
+.stickers { display: flex; justify-content: center; gap: 15px; margin-top: 20px; flex-wrap: wrap; }
+.stickers img { width: clamp(60px, 18vw, 100px); border-radius: 15px; transition: transform 0.3s ease; }
+.stickers img:hover { transform: scale(1.2) rotate(-5deg); }
+
+/* ==============================
+   Message Section
+============================== */
+#messageSection { padding: 40px 20px; }
+#typedText { font-size: clamp(22px, 6vw, 40px); color: var(--pink-4); margin-bottom: 20px; text-shadow: 2px 2px 8px var(--shadow-dark); }
+.subline { font-size: clamp(15px, 3vw, 20px); margin-bottom: 20px; color: #fff; text-shadow: 1px 1px 6px var(--shadow-dark); }
+.emojiWrap p { margin-bottom: 10px; color: #fff; }
+.emoji { font-size: clamp(24px, 6vw, 36px); margin: 10px; cursor: pointer; transition: 0.2s ease; text-shadow: 1px 1px 6px var(--shadow-dark); }
+.emoji:hover { transform: scale(1.3); }
+
+/* ==============================
+   3D Gallery
+============================== */
+.gallery-section { display: none; margin: 60px auto; perspective: 1000px; }
+.gallery {
+  width: clamp(200px, 60vw, 300px);
+  height: clamp(200px, 60vw, 300px);
+  margin: auto;
+  position: relative;
+  transform-style: preserve-3d;
+  animation: rotate 20s linear infinite;
+}
+.gallery img {
+  position: absolute;
+  width: 80%;
+  height: 80%;
+  left: 50%;
+  top: 50%;
+  transform-style: preserve-3d;
+  border-radius: 15px;
+  object-fit: cover;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+}
+.gallery img:nth-child(1){transform:translate(-50%,-50%) rotateY(0deg) translateZ(280px);}
+.gallery img:nth-child(2){transform:translate(-50%,-50%) rotateY(45deg) translateZ(280px);}
+.gallery img:nth-child(3){transform:translate(-50%,-50%) rotateY(90deg) translateZ(280px);}
+.gallery img:nth-child(4){transform:translate(-50%,-50%) rotateY(135deg) translateZ(280px);}
+.gallery img:nth-child(5){transform:translate(-50%,-50%) rotateY(180deg) translateZ(280px);}
+.gallery img:nth-child(6){transform:translate(-50%,-50%) rotateY(225deg) translateZ(280px);}
+.gallery img:nth-child(7){transform:translate(-50%,-50%) rotateY(270deg) translateZ(280px);}
+.gallery img:nth-child(8){transform:translate(-50%,-50%) rotateY(315deg) translateZ(280px);}
+@keyframes rotate { from{transform:rotateY(0deg);} to{transform:rotateY(360deg);} }
+
+/* ==============================
+   Fullscreen Gallery
+============================== */
+.fullscreen { display: none; position: fixed; inset: 0; background: black; padding: 20px; z-index: 300; overflow-y: auto; }
+.fs-top { display: flex; justify-content: space-between; align-items: center; color: #fff; max-width: 1200px; margin: auto; }
+.fs-grid { margin: 20px auto; max-width: 1200px; display: grid; gap: 15px; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
+.fs-grid img { width: 100%; height: 250px; object-fit: cover; border-radius: 15px; transition: transform 0.3s ease; }
+.fs-grid img:hover { transform: scale(1.05); }
+
+/* ==============================
+   Footer
+============================== */
+footer {
+  padding: 30px 20px;
+  font-size: clamp(14px, 2.5vw, 18px);
+  color: #fff;
+  text-shadow: 1px 1px 6px var(--shadow-dark);
+  text-align: center;
+  font-style: italic;
+}
+
+/* ==============================
+   Utility
+============================== */
+.hidden { display: none !important; }
+
+/* ==============================
+   Responsive
+============================== */
+@media (max-width: 1024px){
+  .gallery { width: 50vw; height: 50vw; }
+  .gallery img { width: 90%; height: 90%; }
+}
+@media (max-width: 768px) {
+  header { flex-direction: column; gap: 10px; padding: 10px 15px; }
+  .controls { justify-content: center; gap: 8px; }
+  .buttons button { width: 90%; font-size: 14px; padding: 12px 0; }
+  #typedText { font-size: clamp(20px, 5vw, 36px); }
+  .emoji { font-size: clamp(20px, 5vw, 32px); }
+  .stickers img { width: clamp(50px, 20vw, 90px); }
+  #giftBox { width: clamp(130px, 50vw, 220px); }
+}
+@media (max-width: 480px) {
+  header { flex-direction: column; gap: 8px; }
+  .buttons button { width: 80%; padding: 10px 0; font-size: 13px; }
+  .brand { font-size: clamp(18px, 5vw, 26px); }
+  #typedText { font-size: clamp(18px, 5vw, 32px); }
+  .subline { font-size: clamp(14px, 4vw, 18px); }
+  .emoji { font-size: clamp(18px, 5vw, 28px); }
+  #giftBox { width: clamp(120px, 50vw, 200px); }
+  .letter-box { padding: 20px 15px; }
+  .letter-box h3 { font-size: clamp(18px, 6vw, 24px); }
+  .letter-box input { font-size: 14px; }
+  .letter-box button { font-size: 14px; padding: 10px 20px; }
+  .letter-box p { font-size: 14px; }
+}
