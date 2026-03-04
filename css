@@ -447,14 +447,11 @@ header {
   margin-bottom: 20px;
 }
 
-.emoji {
-  font-size: clamp(24px, 6vw, 36px);
-  margin: 10px;
-  cursor: pointer;
-  transition: 0.2s ease;
+.emojiWrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
-
-.emoji:hover { transform: scale(1.3); }
 
 .emojiWrap p {
   margin-bottom: 10px;
